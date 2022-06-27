@@ -24,11 +24,20 @@ Route::prefix('admin')->group(function () {
     })->name('admin.produtos');
 });
 
+Route::get('/rota1', function () {
+    return 'Rota 1';
+})->name('site.rota1');
+
+Route::get('/rota2', function () {
+    return redirect()->route('site.rota1');
+})->name('site.rota2');
+
+// Route::redirect('/rota2', '/rota1'); Usando o método redirect() direto na rota
 
 
-
-
-
+Route::fallback(function () {
+    echo 'A página solicitada não foi encontrada. <a href='.route ('site.index').'>Clique aqui</a> para retornar ao site.';
+});
 // Route::get
 //     ('contato/{nome}/{categoria_id}',
 //     function (
